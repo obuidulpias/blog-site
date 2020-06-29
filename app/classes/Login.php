@@ -13,6 +13,10 @@ class Login
       $queryResult = mysqli_query(Database::dbConnection(), $sql);
       $user = mysqli_fetch_assoc($queryResult);
       if ($user) {
+        session_start();
+        $_SESSION['id']=$user['id'];
+        $_SESSION['name']=$user['name'];
+
         header('Location: dashboard.php');
 
       } else {
@@ -23,4 +27,12 @@ class Login
         die("Query Problem".mysqli_error(Database::dbConnection()));
     }
   }
+
+  public function adminLogout() {
+    unset($_SESSION['id']);
+    unset($_SESSION['name']);
+
+    header('Location: index.php');
+  }
+
 }

@@ -1,4 +1,9 @@
 <?php
+  session_start();
+  if(isset($_SESSION['id'])) {
+    header('Location: dashboard.php');
+  }
+
   require_once "../vendor/autoload.php";
   $login = new App\classes\Login();
   $message = "";
@@ -27,7 +32,7 @@
                         <p align=center><i><b>Admin Pannel</b></i></p>
                       </div>
                         <div class="card-body">
-                          <h3><<?php echo "$message"; ?></h3>
+                          <h3><?php echo "$message"; ?></h3>
                             <form action="" method="POST">
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
